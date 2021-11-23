@@ -7,7 +7,7 @@ import {
 import { createStackNavigator } from 'react-navigation-stack'
 
 import WelcomePage from './src/pages/Welcome'
-import TabNavigator from './src/pages/TabNavigator'
+import TabNavigator from './src/TabNavigator'
 // import DetailPage from '../components/homePages/DetailPage'
 
 // APP的启动页面必须使用createSwitchNavigator，防止按返回按钮回到启动页
