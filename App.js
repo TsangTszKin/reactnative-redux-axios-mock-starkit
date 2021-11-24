@@ -3,6 +3,8 @@ import {
   createSwitchNavigator,
   createAppContainer
 } from 'react-navigation';
+import { Provider } from 'react-redux';
+import store from './src/store'
 
 import { createStackNavigator } from 'react-navigation-stack'
 
@@ -32,7 +34,7 @@ const MainNavigator = createStackNavigator({
   //   navigationOptions: {
   //   }
   // }
-},{
+}, {
   initialRouteName: 'TabNavigator'
 })
 
@@ -49,4 +51,11 @@ const NavInit = createSwitchNavigator({
 // export const RootNavigator =  createAppContainer(NavInit)
 
 const AppNavigation = createAppContainer(NavInit) // react-navigation3.x必须使用createAppContainer包裹
-export default AppNavigation;
+const App = () => {
+  return (
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
+  )
+}
+export default App;

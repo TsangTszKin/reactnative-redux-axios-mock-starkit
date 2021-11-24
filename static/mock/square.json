@@ -1,0 +1,27 @@
+{
+	code: 0,
+	message: '请求成功',
+	data: {
+		total: 10,
+		list: [
+			{
+				userName: '张三',
+				createTime: '2021年11月24日17:16',
+				shop: '喜茶',
+				address: '广东省广州市天河区猎德街道华强路1号'
+			},
+			{
+				userName: '李四',
+				createTime: '2021年11月25日17:16',
+				shop: '奈雪的茶',
+				address: '广东省广州市天河区猎德街道华强路2号'
+			},
+			{
+				userName: '赵六',
+				createTime: '2021年11月26日17:16',
+				shop: '一点点',
+				address: '广东省广州市天河区猎德街道华强路3号'
+			}
+		]
+	}
+}
