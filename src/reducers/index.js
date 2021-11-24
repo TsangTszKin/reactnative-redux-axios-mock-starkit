@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import square from './square';
+import square from './squareReducer';
 
 export default combineReducers({
     square,

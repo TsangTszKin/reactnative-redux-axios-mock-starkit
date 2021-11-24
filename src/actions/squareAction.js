@@ -20,12 +20,15 @@ const requestCardList = (...params) => {
 		try {
 			dispatch(loadCardList())
 			const res = await squareService.getCardList(...params)
+			console.log('res', res)
 			return dispatch(updateCardList(res.data.data))
-		} catch (err) {}
+		} catch (err) {
+			console.error('err', err)
+		}
 	}
 }
 
-export default {
+export {
 	loadCardList,
 	updateCardList,
 	requestCardList

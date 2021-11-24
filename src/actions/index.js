@@ -2,7 +2,7 @@ import {
 	loadCardList,
 	updateCardList,
 	requestCardList
-} from './square.js'
+} from './squareAction'
 
 export {
 	loadCardList,
