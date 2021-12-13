@@ -3,22 +3,31 @@
  * @author: 逍游
  * @time: Do not edit
  */
-import { getShareList } from './mock';
-
-const getCardList = params => {
-    return new Promise(resolve => {
-        resolve(getShareList)
-    })
-}
+import { getBanner_mock, getShareList_mock, getShopList_mock } from './mock';
 
 const getBanner = params => {
     return new Promise(resolve => {
-        resolve(getShareList)
+        setTimeout(() => {
+            resolve(getBanner_mock)
+        }, 500);
+    })
+}
+
+const getCardList = params => {
+    return new Promise(resolve => {
+        resolve(getShareList_mock)
+    })
+}
+
+const getShareList = params => {
+    return new Promise(resolve => {
+        resolve(getShopList_mock)
     })
 }
 
 
 export {
+    getBanner,
     getCardList,
-    getBanner
+    getShareList
 }

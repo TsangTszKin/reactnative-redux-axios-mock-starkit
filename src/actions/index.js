@@ -1,11 +1,17 @@
 import {
-	loadCardList,
+	load_card_list,
+	load_banner,
 	updateCardList,
-	requestCardList
+	updateBanner,
+	requestCardList,
+	requestBanner,
 } from './squareAction'
 
 export {
-	loadCardList,
+	load_card_list,
+	load_banner,
 	updateCardList,
-	requestCardList
+	updateBanner,
+	requestCardList,
+	requestBanner,
 }

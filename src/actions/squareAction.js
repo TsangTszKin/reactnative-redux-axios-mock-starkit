@@ -1,27 +1,53 @@
 import {
 	LOAD_CARD_LIST,
+	LOAD_BANNER,
 	UPDATE_CARD_LIST,
+	UPDATE_BANNER,
 } from './types';
-import { getCardList } from '../services/squareService';
+import { getCardList, getBanner } from '../services/squareService';
 
-const loadCardList = () => {
+const load_card_list = () => {
 	return {
 		type: LOAD_CARD_LIST
 	}
 }
-const updateCardList = (cardList) => {
+const load_banner = () => {
+	return {
+		type: LOAD_BANNER
+	}
+}
+const updateCardList = (data) => {
 	return {
 		type: UPDATE_CARD_LIST,
-		cardList
+		data
+	}
+}
+const updateBanner = (banner) => {
+	return {
+		type: UPDATE_BANNER,
+		banner
 	}
 }
 const requestCardList = (...params) => {
 	return async (dispatch) => {
 		try {
-			dispatch(loadCardList())
+			dispatch(load_card_list())
 			const res = await getCardList(...params)
 			console.log('res', res)
-			return dispatch(updateCardList(res.result.dataList))
+			return dispatch(updateCardList(res.data))
+		} catch (err) {
+			console.error('err', err)
+		}
+	}
+}
+
+const requestBanner = (...params) => {
+	return async (dispatch) => {
+		try {
+			dispatch(load_banner())
+			const res = await getBanner(...params)
+			console.log('res', res)
+			return dispatch(updateBanner(res.data))
 		} catch (err) {
 			console.error('err', err)
 		}
@@ -29,7 +55,10 @@ const requestCardList = (...params) => {
 }
 
 export {
-	loadCardList,
+	load_card_list,
+	load_banner,
 	updateCardList,
-	requestCardList
+	updateBanner,
+	requestCardList,
+	requestBanner,
 }

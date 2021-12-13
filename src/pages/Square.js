@@ -1,7 +1,7 @@
 import React from 'react'
 import { SafeAreaView, View, FlatList, StyleSheet, ScrollView, StatusBar, Button } from 'react-native'
 import { connect } from 'react-redux';
-import { requestCardList } from '../actions/'
+import { requestCardList, requestBanner } from '../actions'
 import { WhiteSpace, SearchBar } from '@ant-design/react-native';
 import Banner from '../components/home/Banner';
 import ShareListPannel from '../components/common/ShareListPannel';
@@ -9,20 +9,28 @@ import ShareListPannel from '../components/common/ShareListPannel';
 @connect(
   state => ({
     cardList: state.square.cardList,
+    banner: state.square.banner,
   }),
   dispatch => ({
-    requestCardList: (...params) => dispatch(requestCardList(...params))
+    requestCardList: (...params) => dispatch(requestCardList(...params)),
+    requestBanner: (...params) => dispatch(requestBanner(...params)),
   })
 )
 class Square extends React.Component {
+
+  componentDidMount() {
+    this.props.requestBanner()
+  }
+
   render() {
+    console.log('this.props.banner', this.props.banner)
     return (
       <SafeAreaView >
 
         <ScrollView automaticallyAdjustContentInsets={false}>
           <SearchBar placeholder="搜索商户、美食、地点、用户" />
           {/* <WhiteSpace /> */}
-          <Banner />
+          <Banner banner={this.props.banner} />
           <View style={{ marginTop: 10 }}>
             <ShareListPannel
             // dataList={store.list.getData.dataSource}

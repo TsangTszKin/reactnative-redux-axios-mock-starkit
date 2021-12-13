@@ -8,10 +8,11 @@
  * @FilePath: \hello_world\src\Index.js
  */
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {Card, WhiteSpace, Grid, Icon} from '@ant-design/react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { Card, WhiteSpace, Grid, Icon } from '@ant-design/react-native';
 import PropTypes from 'prop-types';
 import Mock from 'mockjs';
+import { cloneDeep } from 'lodash';
 // 图片资源
 import Avator1 from '../../resource/avator/1.jpg';
 import Avator2 from '../../resource/avator/2.jpg';
@@ -36,7 +37,7 @@ const dataList = Mock.mock({
       shopName: '@cword(5)',
       'likeCount|0-99': 99,
       'commentCount|0-99': 99,
-      'imgs|1-9': [Food1, Food2, Food3, Food4, Food5, Food6, Food7, Food8],
+      'imgs': [Food1, Food2, Food3, Food4, Food5, Food6, Food7, Food8],
       'simpleComment|0-5': [
         {
           userName: '@cname',
@@ -48,18 +49,24 @@ const dataList = Mock.mock({
 })
 
 
+const data = Array.from(new Array(9)).map((_val, i) => ({
+  icon: 'https://os.alipayobjects.com/rmsportal/IptWdCkrtkAUfjE.png',
+  text: `Name${i}`,
+}));
+
+
 export default class ShareListPannel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  static propTypes = {
-    dataList: PropTypes.array,
-  };
-  static defaultProps = {
-    dataList: dataList.dataList
-  };
+  // static propTypes = {
+  //   dataList: PropTypes.array,
+  // };
+  // static defaultProps = {
+  //   dataList: dataList.dataList
+  // };
 
   onHorizontalSelectedIndexChange() {
     /* tslint:disable: no-console */
@@ -69,13 +76,13 @@ export default class ShareListPannel extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.dataList.map((item, i) => {
+        {dataList.dataList.map((item, i) => {
           return (
             <React.Fragment key={i}>
-              <Card style={{marginBottom: 10}}>
+              <Card style={{ marginBottom: 10 }}>
                 <Card.Header
                   title={item.userName}
-                  thumbStyle={{width: 30, height: 30}}
+                  thumbStyle={{ width: 30, height: 30 }}
                   thumb={
                     <Image
                       source={item.avator}
@@ -90,37 +97,38 @@ export default class ShareListPannel extends React.Component {
                   extra={item.time}
                 />
                 <Card.Body>
-                  <View>
-                    <Text style={{marginLeft: 16}}>{item.content}</Text>
-                  </View>
-                  <View style={{marginTop: 20}}>
-                    <Grid
-                      style={{border: 'none'}}
-                      data={(() => {
-                        let result = [];
-                        item.imgs.forEach((el, j) => {
-                          result.push({
-                            icon: (
-                              <Image
-                                source={el}
-                                key={j}
-                                style={{width: '80%', height: '80%'}}
-                              />
-                              // <ImageViewer imageUrls={images} />
-                            ),
-                            text: '',
+                    <View>
+                      <Text style={{ marginLeft: 16 }}>{item.content}</Text>
+                    </View>
+                    <View style={{ marginTop: 20 }}>
+                      <Grid
+                        // style={{ border: 'none' }}
+                        // itemStyle={{ border: 'none', height: 100 }}
+                        data={(() => {
+                          let result = [];
+                          item.imgs.forEach((el, j) => {
+                            result.push({
+                              icon: (
+                                <Image
+                                  source={el}
+                                  key={j}
+                                  style={{ width: '80%', height: '80%' }}
+                                />
+                                // <ImageViewer imageUrls={images} />
+                              ),
+                              text: '',
+                            });
                           });
-                        });
-                        return result;
-                      })()}
-                      columnNum={3}
-                      isCarousel
-                      onPress={(_el, index) => alert(index)}
-                    />
-                  </View>
-                  <Text style={{margin: 15, color: '#4682B4'}}>
-                    {item.city}·{item.shopName}
-                  </Text>
+                          return result;
+                        })()}
+                        columnNum={3}
+                        // isCarousel
+                        onPress={(_el, index) => alert(index)}
+                      />
+                    </View>
+                    <Text style={{ margin: 15, color: '#4682B4' }}>
+                      {item.city}·{item.shopName}
+                    </Text>
                 </Card.Body>
                 <Card.Footer
                   // content={
@@ -129,17 +137,17 @@ export default class ShareListPannel extends React.Component {
                   extra={
                     <View style={styles.footerCell}>
                       <View style={styles.footerCell}>
-                        <Icon name={'heart'} style={{color: '#FBC464'}} />
+                        <Icon name={'heart'} style={{ color: '#FBC464' }} />
                         <Text>{item.likeCount}</Text>
                       </View>
                       <View style={styles.footerCell}>
-                        <Icon name={'message'} style={{color: '#FBC464'}} />
+                        <Icon name={'message'} style={{ color: '#FBC464' }} />
                         <Text>{item.commentCount}</Text>
                       </View>
                     </View>
                   }
                 />
-                <View style={{marginTop: 10}}>
+                <View style={{ marginTop: 10 }}>
                   {item.simpleComment.map((el, j) => (
                     <View style={styles.commentShell} key={j}>
                       <Text style={styles.userName}>
