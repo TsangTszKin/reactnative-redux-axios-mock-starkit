@@ -2,7 +2,7 @@ import {
 	LOAD_CARD_LIST,
 	UPDATE_CARD_LIST,
 } from './types';
-import squareService from '../services/squareService';
+import { getCardList } from '../services/squareService';
 
 const loadCardList = () => {
 	return {
@@ -19,9 +19,9 @@ const requestCardList = (...params) => {
 	return async (dispatch) => {
 		try {
 			dispatch(loadCardList())
-			const res = await squareService.getCardList(...params)
+			const res = await getCardList(...params)
 			console.log('res', res)
-			return dispatch(updateCardList(res.data.data))
+			return dispatch(updateCardList(res.result.dataList))
 		} catch (err) {
 			console.error('err', err)
 		}
