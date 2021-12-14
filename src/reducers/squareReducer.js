@@ -23,13 +23,9 @@ export default (state = initState, action = {}) => {
             return { ...state, loading: true }
         case UPDATE_CARD_LIST:
             let { total, list } = action.data
-            // 设置唯一值key
-            for (var i = state.cardList.localTotal; i < list.length; i++) {
-                list[i].key = i
-            }
             const cardList = {
-                dataSource: [...state.cardList.dataSource, ...list],
-                localTotal: state.cardList.localTotal + dataSource.length,
+                dataSource: action.refresh ? list : [...state.cardList.dataSource, ...list],
+                localTotal: action.refresh ? list.length : state.cardList.localTotal + list.length,
                 remoteTotal: total,
             }
             return { ...state, loading: false, cardList }

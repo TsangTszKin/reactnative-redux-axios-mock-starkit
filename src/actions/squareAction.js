@@ -16,10 +16,11 @@ const load_banner = () => {
 		type: LOAD_BANNER
 	}
 }
-const updateCardList = (data) => {
+const updateCardList = (data, refresh) => {
 	return {
 		type: UPDATE_CARD_LIST,
-		data
+		data,
+		refresh
 	}
 }
 const updateBanner = (banner) => {
@@ -28,13 +29,13 @@ const updateBanner = (banner) => {
 		banner
 	}
 }
-const requestCardList = (...params) => {
+const requestCardList = (refresh = false) => {
 	return async (dispatch) => {
 		try {
 			dispatch(load_card_list())
-			const res = await getCardList(...params)
-			console.log('res', res)
-			return dispatch(updateCardList(res.data))
+			const res = await getCardList()
+			// console.log('res', res)
+			return dispatch(updateCardList(res.data), refresh)
 		} catch (err) {
 			console.error('err', err)
 		}
@@ -46,7 +47,7 @@ const requestBanner = (...params) => {
 		try {
 			dispatch(load_banner())
 			const res = await getBanner(...params)
-			console.log('res', res)
+			// console.log('res', res)
 			return dispatch(updateBanner(res.data))
 		} catch (err) {
 			console.error('err', err)

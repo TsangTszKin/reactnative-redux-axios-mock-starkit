@@ -24,8 +24,9 @@ const getShareList_mock = Mock.mock({
   code: 1,
   message: '操作成功',
   data: {
-    'list|5': [
+    'list|2': [
       {
+        'id': '@guid',
         'avator|1': [Avator1, Avator2, Avator3],
         userName: '@cname',
         time: '@date("yyyy-MM-dd HH:mm")', //日期
@@ -34,7 +35,7 @@ const getShareList_mock = Mock.mock({
         shopName: '@cword(5)',
         'likeCount|0-99': 99,
         'commentCount|0-99': 99,
-        'imgs|1-8': [Food1, Food2, Food3, Food4, Food5, Food6, Food7, Food8],
+        'imgs': [Food1, Food2, Food3, Food4, Food5, Food6, Food7, Food8],
         'simpleComment|0-5': [
           {
             userName: '@cname',
@@ -43,7 +44,7 @@ const getShareList_mock = Mock.mock({
         ],
       },
     ],
-    'total': 20
+    'total': 4
   },
 });
 

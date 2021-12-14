@@ -1,15 +1,16 @@
 import React from 'react'
-import { SafeAreaView, View, FlatList, StyleSheet, ScrollView, StatusBar, Button } from 'react-native'
+import { SafeAreaView, View, FlatList, StyleSheet, ScrollView, ActivityIndicator, Text, RefreshControl } from 'react-native'
 import { connect } from 'react-redux';
 import { requestCardList, requestBanner } from '../actions'
 import { WhiteSpace, SearchBar } from '@ant-design/react-native';
 import Banner from '../components/home/Banner';
-import ShareListPannel from '../components/common/ShareListPannel';
+import ShareItem from '../components/common/ShareItem';
 
 @connect(
   state => ({
     cardList: state.square.cardList,
     banner: state.square.banner,
+    loading: state.square.loading,
   }),
   dispatch => ({
     requestCardList: (...params) => dispatch(requestCardList(...params)),
@@ -20,25 +21,65 @@ class Square extends React.Component {
 
   componentDidMount() {
     this.props.requestBanner()
+    this._onRefresh()
+  }
+
+  _onRefresh = () => {
+    console.log('~~~ 下拉刷新 ~~~')
+    this.props.requestCardList('refresh')
+  }
+
+  _onEndReached = () => {
+    const { dataSource, remoteTotal, localTotal } = this.props.cardList
+    if (localTotal <= remoteTotal) {
+      console.log('~~~ 上拉加载 ~~~')
+      this.props.requestCardList()
+    }
   }
 
   render() {
-    console.log('this.props.banner', this.props.banner)
+    const { dataSource, remoteTotal, localTotal } = this.props.cardList
     return (
       <SafeAreaView >
+        <FlatList
+          ListHeaderComponent={
+            <>
+              <SearchBar placeholder="搜索商户、美食、地点、用户" />
+              <Banner banner={this.props.banner} />
+              <WhiteSpace />
+            </>}
+          data={dataSource}
+          renderItem={el => <ShareItem data={el.item} />}
+          keyExtractor={item => `${item.id}-${Math.random()}`}
+          ListFooterComponent={
+            <View>
+              {
+                localTotal >= remoteTotal ?
+                  <View style={{ flexDirection: 'row', color: '#fff', justifyContent: 'center' }}>
+                    <Text style={{ color: '#000' }}>~~人家是有底线的~~</Text>
+                  </View>
+                  :
+                  <View style={{ flexDirection: 'row', color: '#fff', justifyContent: 'center' }}>
+                    <ActivityIndicator size="small" animating={true} />
+                    <Text style={{ color: '#000' }}>加载更多...</Text>
+                  </View>
+              }
 
-        <ScrollView automaticallyAdjustContentInsets={false}>
-          <SearchBar placeholder="搜索商户、美食、地点、用户" />
-          {/* <WhiteSpace /> */}
-          <Banner banner={this.props.banner} />
-          <View style={{ marginTop: 10 }}>
-            <ShareListPannel
-            // dataList={store.list.getData.dataSource}
+            </View>
+          }
+          refreshControl={
+            <RefreshControl
+              refreshing={this.props.loading}
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              tintColor={'#fff'}
+              progressBackgroundColor={"#ffffff"}
+              onRefresh={() => {
+                this._onRefresh()
+              }}
             />
-          </View>
-          {/* <WhiteSpace /> */}
-        </ScrollView>
-        <Button onPress={() => this.props.requestCardList()} title="mock测试"></Button>
+          }
+          onEndReached={() => this._onEndReached()}
+        />
       </SafeAreaView>
     )
   }
