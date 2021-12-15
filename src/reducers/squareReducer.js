@@ -16,7 +16,7 @@ const initState = {
 }
 
 export default (state = initState, action = {}) => {
-    console.log('---action', action)
+    console.log('square --- action', action)
     switch (action.type) {
         case LOAD_CARD_LIST:
         case LOAD_BANNER:

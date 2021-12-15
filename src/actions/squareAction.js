@@ -4,7 +4,8 @@ import {
 	UPDATE_CARD_LIST,
 	UPDATE_BANNER,
 } from './types';
-import { getCardList, getBanner } from '../services/squareService';
+import { getCardList } from '../services/shareService';
+import { getBanner } from '../services/bannerService';
 
 const load_card_list = () => {
 	return {
@@ -34,8 +35,7 @@ const requestCardList = (refresh = false) => {
 		try {
 			dispatch(load_card_list())
 			const res = await getCardList()
-			// console.log('res', res)
-			return dispatch(updateCardList(res.data), refresh)
+			return dispatch(updateCardList(res.data, refresh))
 		} catch (err) {
 			console.error('err', err)
 		}

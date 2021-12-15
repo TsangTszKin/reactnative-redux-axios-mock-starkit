@@ -64,4 +64,4 @@ const getShopList_mock = Mock.mock({
   },
 });
 
-export { getBanner_mock, getShareList_mock, getShopList_mock }
+export { getBanner_mock, getShareList_mock, getShopList_mock, }
