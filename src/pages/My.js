@@ -1,12 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-/*
- * @Author: your name
- * @Date: 2019-11-13 13:48:13
- * @LastEditTime: 2019-11-21 16:10:09
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \hello_world\src\pages\Message.js
- */
 import React from 'react';
 import {
     Text,
@@ -21,17 +12,19 @@ import BG_img from '../resource/my-bg.jpg';
 import Avator from '../resource/avator/3.jpg';
 import ShopListPannel from '../components/common/ShopListPannel';
 import { connect } from 'react-redux';
-import { requestMyCardList } from '../actions'
+import { requestMyCardList, requestMyShop } from '../actions'
 import ShareItem from '../components/common/ShareItem';
 import Loading from '../components/common/loading'
 
 @connect(
     state => ({
         cardList: state.my.cardList,
+        shopList: state.my.shopList,
         loading: state.my.loading,
     }),
     dispatch => ({
         requestMyCardList: (...params) => dispatch(requestMyCardList(...params)),
+        requestMyShop: (...params) => dispatch(requestMyShop(...params)),
     })
 )
 class My extends React.Component {
@@ -41,9 +34,11 @@ class My extends React.Component {
 
     componentDidMount() {
         this.props.requestMyCardList()
+        this.props.requestMyShop()
     }
 
     render() {
+        console.warn('this.props.cardList', this.props.cardList)
         return (
             <View style={styles.containor}>
                 <View style={{ height: 200 }}>
@@ -105,9 +100,9 @@ class My extends React.Component {
                         </View>
                         <View style={{ marginTop: 10 }}>
                             <ScrollView>
-                                <ShopListPannel
-                                // dataList={store.shopList.getData.dataSource}
-                                />
+                                {
+                                    this.props.loading ? <Loading /> : <ShopListPannel list={this.props.shopList} />
+                                }
                             </ScrollView>
                         </View>
                     </Tabs>

@@ -13,6 +13,9 @@ import Food7 from '../resource/foods/7.jpg';
 import Food8 from '../resource/foods/8.jpg';
 import Banner1 from '../resource/广场banner.jpg';
 import Banner2 from '../resource/u=3958675909,1639915875&fm=21&gp=0.jpg';
+import NoticeIco1 from '../resource/avator/4.jpg';
+import NoticeIco2 from '../resource/avator/3.jpg';
+import NoticeIco3 from '../resource/通知--寻味.png';
 
 const getBanner_mock = Mock.mock({
   code: 1,
@@ -51,8 +54,8 @@ const getShareList_mock = Mock.mock({
 const getShopList_mock = Mock.mock({
   code: 1,
   message: '操作成功',
-  result: {
-    'dataList|5': [
+  data: {
+    'list|5': [
       {
         'avator|1': [Food1, Food2, Food3, Food4, Food5, Food6, Food7, Food8],
         name: '@cword(5)',
@@ -64,4 +67,38 @@ const getShopList_mock = Mock.mock({
   },
 });
 
-export { getBanner_mock, getShareList_mock, getShopList_mock, }
+const getFollowList_mock = Mock.mock({
+  code: 1,
+  message: '操作成功',
+  data: {
+    'list|5': [
+      {
+        'avator|1': [NoticeIco1, NoticeIco2],
+        'userName': '@cname',
+        'time': '@date("yyyy-MM-dd HH:mm")', //日期
+      },
+    ],
+  },
+});
+
+const getNoticeList_mock = Mock.mock({
+  code: 1,
+  message: '操作成功',
+  data: {
+    'list|2': [
+      {
+        'avator|1': [NoticeIco3],
+        'userName': '官方消息',
+        'time': '@date("yyyy-MM-dd HH:mm")', //日期
+      },
+    ],
+  },
+});
+
+export {
+  getBanner_mock,
+  getShareList_mock,
+  getShopList_mock,
+  getFollowList_mock,
+  getNoticeList_mock,
+}

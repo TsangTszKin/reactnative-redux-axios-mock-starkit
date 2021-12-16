@@ -13,25 +13,7 @@ const getBanner = params => {
     })
 }
 
-const getCardList = params => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve(getShareList_mock)
-        }, 1000);
-    })
-}
-
-const getShareList = params => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve(getShopList_mock)
-        }, 500);
-    })
-}
-
 
 export {
     getBanner,
-    getCardList,
-    getShareList
 }

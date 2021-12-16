@@ -11,7 +11,19 @@ import {
 	load_my_card_list,
 	updateMyCardList,
 	requestMyCardList,
+	load_my_shop,
+	updateMyShop,
+	requestMyShop
 } from './myAction'
+
+import {
+	load_follow_list,
+	load_notice_list,
+	updateFollowList,
+	updateNoticeList,
+	requestFollowList,
+	requestNoticeList,
+} from './messageAction'
 
 export {
 	// squareAction
@@ -25,4 +37,14 @@ export {
 	load_my_card_list,
 	updateMyCardList,
 	requestMyCardList,
+	load_my_shop,
+	updateMyShop,
+	requestMyShop,
+	// messageAction
+	load_follow_list,
+	load_notice_list,
+	updateFollowList,
+	updateNoticeList,
+	requestFollowList,
+	requestNoticeList,
 }

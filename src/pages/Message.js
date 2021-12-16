@@ -7,18 +7,34 @@
  * @FilePath: \hello_world\src\pages\Message.js
  */
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {Tabs} from '@ant-design/react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Tabs } from '@ant-design/react-native';
 import Notice from '../components/message/Notice';
 import Follow from '../components/message/Follow';
-// import ViewPager from '@react-native-community/viewpager';
-// import ScrollableTabView, {
-//   DefaultTabBar,
-// } from 'react-native-scrollable-tab-view';
+import { connect } from 'react-redux';
+import { requestFollowList, requestNoticeList } from '../actions'
+import Loading from '../components/common/loading'
 
-export default class Message extends React.Component {
+@connect(
+  state => ({
+    followList: state.message.followList,
+    noticeList: state.message.noticeList,
+    loading: state.message.loading,
+  }),
+  dispatch => ({
+    requestFollowList: (...params) => dispatch(requestFollowList(...params)),
+    requestNoticeList: (...params) => dispatch(requestNoticeList(...params)),
+  })
+)
+class Message extends React.Component {
+
+  componentDidMount() {
+    this.props.requestFollowList()
+    this.props.requestNoticeList()
+  }
+
   render() {
-    const tabs = [{title: '关注'}, {title: '通知'}];
+    const tabs = [{ title: '关注' }, { title: '通知' }];
 
     const style = {
       alignItems: 'center',
@@ -26,7 +42,6 @@ export default class Message extends React.Component {
       backgroundColor: '#fff',
     };
     return (
-      // <View style={{ flex: 1 }}>
       <Tabs
         tabs={tabs}
         tabBarActiveTextColor="#000"
@@ -34,38 +49,20 @@ export default class Message extends React.Component {
         tabBarBackgroundColor="#FBC464"
         tabBarUnderlineStyle="#FBC464"
         renderUnderline={s => {
-          return <View style={{backgroundColor: '#000'}} />;
+          return <View style={{ backgroundColor: '#000' }} />;
         }}>
         <View style={style}>
-          <Follow />
+          {
+            this.props.loading ? <Loading /> : <Follow list={this.props.followList} />
+          }
         </View>
         <View style={style}>
-          <Notice />
+          {
+            this.props.loading ? <Loading /> : <Notice list={this.props.noticeList} />
+          }
         </View>
       </Tabs>
-      // <ViewPager style={styles.viewPager} initialPage={0}>
-      //   <View key="1">
-      //     <Text>First page</Text>
-      //   </View>
-      //   <View key="2">
-      //     <Text>Second page</Text>
-      //   </View>
-      // </ViewPager>
-      // {/* </View> */ }
-      // <ScrollableTabView
-      //   style={{marginTop: 20}}
-      //   initialPage={1}
-      //   renderTabBar={() => <DefaultTabBar />}>
-      //   <Text tabLabel="Tab #1">My</Text>
-      //   <Text tabLabel="Tab #2">favorite</Text>
-      //   <Text tabLabel="Tab #3">project</Text>
-      // </ScrollableTabView>
-      // <View />
     );
   }
 }
-const styles = StyleSheet.create({
-  viewPager: {
-    flex: 1,
-  },
-});
+export default Message
