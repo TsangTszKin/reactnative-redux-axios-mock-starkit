@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { Card, WhiteSpace, Grid, Icon } from '@ant-design/react-native';

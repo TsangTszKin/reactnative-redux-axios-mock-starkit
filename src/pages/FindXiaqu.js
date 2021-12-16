@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+
 /*
  * @Author: your name
  * @Date: 2019-11-17 14:29:30
