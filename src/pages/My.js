@@ -38,7 +38,6 @@ class My extends React.Component {
     }
 
     render() {
-        console.warn('this.props.cardList', this.props.cardList)
         return (
             <View style={styles.containor}>
                 <View style={{ height: 200 }}>
