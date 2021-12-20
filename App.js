@@ -30,7 +30,8 @@ const MainNavigator = createStackNavigator({
   'TabNavigator': {
     screen: TabNavigator,
     navigationOptions: {
-      headerShown: false
+      headerShown: false,
+      headerTitle: '返回'
     },
   },
   'FindMetro': {

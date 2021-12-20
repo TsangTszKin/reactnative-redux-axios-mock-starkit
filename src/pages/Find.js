@@ -53,7 +53,6 @@ class Find extends React.Component {
             onPress={(_el, index) => {
               switch (index) {
                 case 0:
-                  console.warn('this.props.navigation.navigate', this.props.navigation.navigate)
                   this.props.navigation.navigate('FindXiaqu');
                   break;
                 case 1:

@@ -14,6 +14,10 @@ const Tab = createBottomTabNavigator();
 
 export default class TabNavigator extends React.Component {
 
+  componentDidMount() {
+    window.navigation = this.props.navigation
+  }
+
   render() {
     return (
       <NavigationContainer>
@@ -28,7 +32,7 @@ export default class TabNavigator extends React.Component {
               ),
             }}
           />
-          <Tab.Screen name="发现" component={Find}
+          <Tab.Screen name="发现" component={() => <Find navigation={this.props.navigation} />}
             options={{
               tabBarLabel: ({ color, focused }) => (
                 <Text style={{ color: focused ? '#FBC464' : color }}>发现</Text>

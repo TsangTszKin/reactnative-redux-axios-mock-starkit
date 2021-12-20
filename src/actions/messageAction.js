@@ -36,10 +36,8 @@ const requestFollowList = () => {
 		try {
 			dispatch(load_follow_list())
 			const res = await getFollowList()
-			console.warn('res', res)
 			return dispatch(updateFollowList(res.data))
 		} catch (err) {
-			console.error('err', err)
 		}
 	}
 }

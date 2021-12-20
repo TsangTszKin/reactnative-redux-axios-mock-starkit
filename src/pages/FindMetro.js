@@ -1,12 +1,3 @@
-
-/*
- * @Author: your name
- * @Date: 2019-11-17 14:29:30
- * @LastEditTime: 2019-11-21 15:08:53
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \hello_world\src\pages\FindMetro.js
- */
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import { Button, Drawer, List } from '@ant-design/react-native';
