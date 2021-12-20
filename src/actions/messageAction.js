@@ -46,10 +46,8 @@ const requestNoticeList = () => {
 		try {
 			dispatch(load_notice_list())
 			const res = await getNoticeList()
-			console.warn('res', res)
 			return dispatch(updateNoticeList(res.data))
 		} catch (err) {
-			console.error('err', err)
 		}
 	}
 }

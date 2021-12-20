@@ -37,7 +37,6 @@ const requestCardList = (refresh = false) => {
 			const res = await getCardList()
 			return dispatch(updateCardList(res.data, refresh))
 		} catch (err) {
-			console.error('err', err)
 		}
 	}
 }
@@ -47,10 +46,8 @@ const requestBanner = (...params) => {
 		try {
 			dispatch(load_banner())
 			const res = await getBanner(...params)
-			// console.log('res', res)
 			return dispatch(updateBanner(res.data))
 		} catch (err) {
-			console.error('err', err)
 		}
 	}
 }

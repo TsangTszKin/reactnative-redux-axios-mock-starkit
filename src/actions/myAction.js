@@ -34,10 +34,8 @@ const requestMyCardList = () => {
 		try {
 			dispatch(load_my_card_list())
 			const res = await getCardList()
-			console.warn('res', res)
 			return dispatch(updateMyCardList(res.data))
 		} catch (err) {
-			console.error('err', err)
 		}
 	}
 }
@@ -46,10 +44,8 @@ const requestMyShop = () => {
 		try {
 			dispatch(load_my_shop())
 			const res = await getShopList()
-			console.warn('res', res)
 			return dispatch(updateMyShop(res.data))
 		} catch (err) {
-			console.error('err', err)
 		}
 	}
 }

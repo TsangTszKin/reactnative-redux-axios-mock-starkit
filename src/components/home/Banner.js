@@ -12,8 +12,6 @@ export default class Banner extends React.Component {
   }
 
   onHorizontalSelectedIndexChange(index) {
-    /* tslint:disable: no-console */
-    // console.log('horizontal change to', index);
   }
 
   render() {

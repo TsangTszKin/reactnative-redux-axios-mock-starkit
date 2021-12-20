@@ -112,8 +112,6 @@ export default class CardList extends React.Component {
   };
 
   onHorizontalSelectedIndexChange(index) {
-    /* tslint:disable: no-console */
-    // console.log('horizontal change to', index);
   }
 
   render() {

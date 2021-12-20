@@ -26,8 +26,6 @@ export default class ShopListPannel extends React.Component {
   };
 
   onHorizontalSelectedIndexChange() {
-    /* tslint:disable: no-console */
-    // console.log('horizontal change to', index);
   }
 
   render() {
